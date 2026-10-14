@@ -13,8 +13,9 @@ Open http://localhost:8766. No build or dependency install needed: Three.js and 
 
 ## Controls
 - **Desktop:** W/A/S/D or arrows to walk, Shift to move faster. Click the scene to capture the mouse; drag to look when pointer lock is unavailable. Escape releases the mouse. Pause opens the pause menu.
-- **Mobile:** left thumb joystick walks; drag the scene with the right thumb to look. Touch buttons operate the lantern, encounters, map and journal.
-- **E:** witness the nearby haunting; **F:** lantern; **M:** map; **J:** journal.
+- **Mobile:** left thumb joystick walks; drag the scene with the right thumb to look. Touch buttons operate the lantern, map and journal.
+- **F:** lantern; **M:** map; **J:** journal.
+- Hauntings are already present as you approach. Look around to discover them; there is no encounter button or popup. Sightings are recorded quietly in the journal.
 - The map allows instant travel to every landmark. Auto walk is available for one-handed navigation.
 - Turn **Sound on** to start audio; headphones reveal the stereo whisper effects.
 - Settings include High / Balanced / Battery saver, reduced motion and volume. Touch devices start with reduced forest density and Balanced graphics.
@@ -26,7 +27,7 @@ Open http://localhost:8766. No build or dependency install needed: Three.js and 
 - Moving foliage, dynamic moon shadows, animated water, low mist, intermittent moonbeams, particles, a handheld lantern and illuminated trail markers.
 - Distinct 3D spectral creatures: humanoid apparitions, antlered old gods, wisps, water creatures, a scarecrow, a wolf and a moth queen.
 - Synthesized wind, footsteps, water, distant calls and stereo breath-like whispers. These are atmospheric sound effects, not recorded dialogue.
-- Tree, wall and stone collision; continuous walking between locations; map travel; locally saved journal. Witness all 24 hauntings to complete the journal.
+- Tree, wall and stone collision; continuous walking between locations; map travel; locally saved journal. See all 24 hauntings to complete the journal.
 
 ## GitHub Pages
 Push the repository to GitHub. Under Settings → Pages, publish `main` from `/(root)`. All imports and asset paths are relative and work under a project URL. The repository is currently private; GitHub Pages availability depends on the account plan. Visibility has not been changed automatically.
@@ -39,9 +40,19 @@ Upload `hauntedforest-itch.zip` as an HTML game with **This file will be played 
 - `world.js`: world generation, structures, vegetation, hauntings and shaders
 - `locations.js`: 24 locations and encounter stories
 - `audio.js`: browser audio synthesis
+- `apparitions.js`: detailed characters, spectral materials, cloth, faces, hands, wings and animation rigs
+- `hauntings.js`: automatic sight-based journal discovery, with view and obstacle checks
+- `tests/hauntings.test.js`: discovery and model integrity checks
 - `assets/`: locally packaged photographic texture maps
 - `vendor/`: Three.js and its MIT license
 - `CREDITS.md`: asset sources and licenses
 
 ## Requirements and limits
 Current desktop/mobile browser with WebGL 2 and hardware acceleration. This is a detailed procedural browser environment, not photorealistic scanned scenery. Creature encounters are environmental exploration events, without combat. Browser storage can be cleared and is not shared across devices. On slower devices choose Battery saver. Real-device phone GPU, touch and audio behavior should be tested before a public launch.
+
+## Apparition update
+Hauntings fade naturally into view between 42 and 28 metres. They remain visible without any input, whether or not their story has been recorded. Looking at an unobstructed figure within 24 metres records its story after a brief glance. No encounter dialog opens; narrative remains in the journal.
+
+Characters have woven, folded and frayed garments; layered veils and hair; modelled brows, cheeks, noses and mouths; jointed fingers; moving arms, heads and cloth; spectral edge lighting and drifting motes. Creature variants include branching antlers and lichen, patterned and veined moth wings, a furred spectral wolf, water creatures with moving tendrils, and groups at the chapel and campsite. Reduced motion also stops apparition idle animation.
+
+Run `npm test` (or `node tests/hauntings.test.js`) to verify automatic sightings and geometry for all 24 characters.

@@ -3,3 +3,5 @@
 @media(max-width:700px){#touchControls{display:block}}
 
 #trailDistance{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);pointer-events:none;text-align:center}#count.recorded{animation:journal-note 2.5s ease-out}@keyframes journal-note{0%,30%{color:#def6d2;text-shadow:0 0 14px #9bf0bd}100%{color:inherit;text-shadow:none}}@media(max-width:700px){#trailDistance{bottom:155px}}@media(prefers-reduced-motion:reduce){#count.recorded{animation:none}}
+
+.cancelRoute{margin-top:18px}#trailDistance{padding:7px 14px;border-radius:3px;background:#081912a0}#trailDistance:has(#distance:empty){display:none}

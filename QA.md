@@ -9,3 +9,11 @@
 - Preserved existing journal storage; no saved discoveries were cleared.
 
 Physical iOS/Android device performance and audio quality remain unverified. Desktop pointer lock is blocked by the preview browser; drag-to-look and keyboard walking were exercised instead.
+
+## Trail update checks
+- Route planning tests found walkable paths to all 24 destination approaches using the actual world colliders, including the added shrub banks.
+- Verified routes avoid blocked cells and synthetic walls, and planning leaves the supplied player position unchanged.
+- In the browser, player coordinates were identical before and after selecting a distant destination.
+- Inspected the dense foliage and subtle guiding light at phone and desktop widths.
+- Walked from the Black Gate toward Will-o’-Wisp Fen; remaining distance updated and guidance cleared on arrival.
+- No captured browser errors or warnings during route selection and walking.

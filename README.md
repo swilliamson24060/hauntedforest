@@ -16,7 +16,7 @@ Open http://localhost:8766. No build or dependency install needed: Three.js and 
 - **Mobile:** left thumb joystick walks; drag the scene with the right thumb to look. Touch buttons operate the lantern, map and journal.
 - **F:** lantern; **M:** map; **J:** journal.
 - Hauntings are already present as you approach. Look around to discover them; there is no encounter button or popup. Sightings are recorded quietly in the journal.
-- The map allows instant travel to every landmark. Auto walk is available for one-handed navigation.
+- Select a landmark on the map to illuminate a walkable route from your current position. You stay where you are and follow the faint green trail. Auto walk is available for one-handed navigation.
 - Turn **Sound on** to start audio; headphones reveal the stereo whisper effects.
 - Settings include High / Balanced / Battery saver, reduced motion and volume. Touch devices start with reduced forest density and Balanced graphics.
 
@@ -27,7 +27,7 @@ Open http://localhost:8766. No build or dependency install needed: Three.js and 
 - Moving foliage, dynamic moon shadows, animated water, low mist, intermittent moonbeams, particles, a handheld lantern and illuminated trail markers.
 - Distinct 3D spectral creatures: humanoid apparitions, antlered old gods, wisps, water creatures, a scarecrow, a wolf and a moth queen.
 - Synthesized wind, footsteps, water, distant calls and stereo breath-like whispers. These are atmospheric sound effects, not recorded dialogue.
-- Tree, wall and stone collision; continuous walking between locations; map travel; locally saved journal. See all 24 hauntings to complete the journal.
+- Tree, wall and stone collision; continuous walking between locations; map guidance; locally saved journal. See all 24 hauntings to complete the journal.
 
 ## GitHub Pages
 Push the repository to GitHub. Under Settings → Pages, publish `main` from `/(root)`. All imports and asset paths are relative and work under a project URL. The repository is currently private; GitHub Pages availability depends on the account plan. Visibility has not been changed automatically.
@@ -37,7 +37,9 @@ Upload `hauntedforest-itch.zip` as an HTML game with **This file will be played 
 
 ## Files
 - `game.js`: first-person movement, input, lighting, interface, journal and game loop
-- `world.js`: world generation, structures, vegetation, hauntings and shaders
+- `world.js`: world generation, structures, dense trail-edge vegetation, hauntings and shaders
+- `navigation.js`: obstacle-aware route planning that prefers trails
+- `guidance.js`: terrain-following guiding light, rerouting and arrival handling
 - `locations.js`: 24 locations and encounter stories
 - `audio.js`: browser audio synthesis
 - `apparitions.js`: detailed characters, spectral materials, cloth, faces, hands, wings and animation rigs
@@ -56,3 +58,6 @@ Hauntings fade naturally into view between 42 and 28 metres. They remain visible
 Characters have woven, folded and frayed garments; layered veils and hair; modelled brows, cheeks, noses and mouths; jointed fingers; moving arms, heads and cloth; spectral edge lighting and drifting motes. Creature variants include branching antlers and lichen, patterned and veined moth wings, a furred spectral wolf, water creatures with moving tendrils, and groups at the chapel and campsite. Reduced motion also stops apparition idle animation.
 
 Run `npm test` (or `node tests/hauntings.test.js`) to verify automatic sightings and geometry for all 24 characters.
+
+## Trail guidance
+The map selects destinations without teleportation. A faint, soft-edged green glow highlights the next stretch of the route, following terrain and avoiding tree trunks, stonework, walls and shrub centres. Walking off-route triggers a new route from your current position. The light ends at the landmark approach; you can clear it at any time from the map. Dense shrubs, ferns and taller undergrowth define the trail edges, with open junctions and landmark entrances.

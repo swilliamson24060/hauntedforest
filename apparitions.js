@@ -1,3 +1,5 @@
+import {animateSculpted} from './sculpted-hauntings.js?v=3.1';
+import {animateWraith} from './imported-wraith.js?v=5';
 import * as T from './vendor/three.module.js';
 
 // Shared geometry; each character owns its materials and animation rig.
@@ -348,6 +350,8 @@ export function createApparition(location, environment) {
 }
 
 export function animateApparition(root, time, camera, reduced, fade = 1) {
+  if(root.userData.sculpted){animateSculpted(root,time,reduced,fade);return;}
+  if(root.userData.importedWraith){animateWraith(root,time,reduced,fade);return;}
   const rig = root.userData.rig, t = reduced ? 0 : time;
   clock.value = t;
   root.position.y = root.userData.baseY + (reduced ? 0 : Math.sin(t * .8 + root.userData.id) * rig.float);
@@ -360,5 +364,5 @@ export function animateApparition(root, time, camera, reduced, fade = 1) {
   for(const a of rig.tendrils){a.object.rotation.y=a.base+(reduced?0:Math.sin(t*.46+a.phase)*.1);a.object.rotation.x=reduced?0:Math.sin(t*.7+a.phase)*.06;}
   for(const a of rig.orbits){a.object.position.x=Math.cos(t*a.speed+a.phase)*a.radius;a.object.position.z=Math.sin(t*a.speed+a.phase)*a.radius;a.object.position.y=a.height+(reduced?0:Math.sin(t*.7+a.phase)*.09);}
   if(rig.motes)rig.motes.rotation.y=t*.12;
-  for(const m of rig.materials)m.opacity=m.userData.baseOpacity*fade;
+  for(const m of rig.materials){m.opacity=m.userData.baseOpacity*fade;m.depthWrite=false;}
 }

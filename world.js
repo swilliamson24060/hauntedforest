@@ -1,10 +1,13 @@
+import {requestSculptedModel} from './sculpted-hauntings.js?v=3.1';
+import {installWraith} from './imported-wraith.js?v=5';
+import {apparitionVisibility} from './hauntings.js?v=3.1';
 import * as T from './vendor/three.module.js';
 import {locations} from './locations.js';
-import {createApparition, animateApparition} from './apparitions.js';
+import {createApparition, animateApparition} from './apparitions.js?v=3.1';
 export function rng(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 const rand=rng(7331),PI=Math.PI;
 export const terrainHeight=(x,z)=>Math.sin(x*.026)*1.3+Math.cos(z*.029)*1.0+Math.sin(x*.09+z*.065)*.22;
-export function makeWorld(scene,{mobile=false,onProgress=()=>{}}={}){
+export function makeWorld(scene,{mobile=false,loadModels=true,onProgress=()=>{}}={}){
 const colliders=[],animated=[],ghosts=[],lights=[],waters=[],beams=[],fogPlanes=[];const batches=new Map(),dummy=new T.Object3D();let serial=0;
 const textures={},textureLoads=[];
 function photo(asset,repeatX=1,repeatY=1){const maps={};for(let [suffix,key]of [['color','map'],['normal','normalMap'],['rough','roughnessMap']]){let resolve,reject;textureLoads.push(new Promise((r,j)=>{resolve=r;reject=j;}));let tex=new T.TextureLoader().load('./assets/'+asset+'-'+suffix+'.jpg',resolve,undefined,reject);tex.wrapS=tex.wrapT=T.RepeatWrapping;tex.repeat.set(repeatX,repeatY);tex.anisotropy=8;if(suffix==='color')tex.colorSpace=T.SRGBColorSpace;maps[key]=tex;}return maps;}
@@ -112,6 +115,7 @@ if(type==='clearing'){for(let j=0;j<140;j++){let a=rand()*6.28,r=3+rand()*4,xx=x
 if(type==='lantern'){for(let j=0;j<12;j++){let a=j/12*6.28;stone(x+Math.sin(a)*3,y+.2,z+Math.cos(a)*3,.5);}torch(x,y+1,z,0xa1e8cb);}
 // The inhabitants are part of the world; proximity only controls rendering distance.
 let ghost=createApparition(l,materials);
+if(l.id===0&&loadModels)textureLoads.push(installWraith(ghost).catch(error=>console.warn("Wraith unavailable; using original gatekeeper",error)));
 // Place inhabitants where their silhouettes belong to the landmark rather than inside solid props.
 const offsets={2:[0,2.2],4:[0,1.0],10:[1.8,0],11:[0,2],12:[0,0],13:[0,1],15:[0,0],16:[0,1],17:[-1,0],18:[0,-1],21:[0,0],23:[-1.4,1.2]};
 const offset=offsets[l.id]||[0,0];const gx=x+offset[0],gz=z+offset[1];
@@ -127,5 +131,5 @@ const beamMat=new T.MeshBasicMaterial({color:0xb4d6dc,transparent:true,opacity:.
 let particleGeo=new T.BufferGeometry(),particlePos=[];for(let i=0;i<850;i++)particlePos.push((rand()-.5)*320,rand()*16+1,(rand()-.5)*240);particleGeo.setAttribute('position',new T.Float32BufferAttribute(particlePos,3));let particles=new T.Points(particleGeo,new T.PointsMaterial({map:soft,color:0xcef1b3,size:.11,transparent:true,opacity:.7,depthWrite:false,blending:T.AdditiveBlending}));scene.add(particles);
 // Moon and stars are distant 3D objects, independent of the walking area.
 const moon=new T.Mesh(new T.SphereGeometry(5,32,24),new T.MeshBasicMaterial({color:0xd5e4de}));moon.position.set(-25,90,-180);scene.add(moon);let glow=new T.Sprite(new T.SpriteMaterial({map:soft,color:0x90c6dc,transparent:true,opacity:.65,depthWrite:false,blending:T.AdditiveBlending}));glow.position.copy(moon.position);glow.scale.set(50,50,1);scene.add(glow);let stars=[];for(let i=0;i<1400;i++){let a=rand()*6.28,e=rand()*PI*.48;stars.push(Math.cos(a)*Math.cos(e)*240,Math.sin(e)*240+10,Math.sin(a)*Math.cos(e)*240);}let sg=new T.BufferGeometry();sg.setAttribute('position',new T.Float32BufferAttribute(stars,3));scene.add(new T.Points(sg,new T.PointsMaterial({color:0xb9d0d7,size:.3,fog:false,transparent:true,opacity:.7})));
-return {ready:Promise.all(textureLoads),roads,bridge:locations[14],colliders,waters,ghosts,terrainHeight,stats:{trees,locations:24},update(t,camera,reduced){windUniform.value=reduced?0:t;for(let f of fogPlanes){f.visible=f.position.distanceToSquared(camera.position)<8500;f.rotation.y=camera.rotation.y;if(!reduced)f.position.x=f.userData.baseX+Math.sin(t*.035+f.userData.phase)*7;}for(let i=0;i<beams.length;i++)beams[i].material.opacity=reduced?.023:.018+Math.max(0,Math.sin(t*.11+i*1.7))*.033;for(let l of lights)l.visible=l.position.distanceToSquared(camera.position)<2400;for(let a of animated){if(!reduced)a.object.rotation.x=t*.12;}for(let g of ghosts){const distance=g.position.distanceTo(camera.position);g.visible=distance<42;if(!g.visible)continue;const fade=1-T.MathUtils.smoothstep(distance,28,42);animateApparition(g,t,camera,reduced,fade);}particles.rotation.y=reduced?0:Math.sin(t*.008)*.04;},setQuality(low){fogMat.opacity=low?.18:.25;}};
+return {ready:Promise.all(textureLoads),roads,bridge:locations[14],colliders,waters,ghosts,terrainHeight,stats:{trees,locations:24},update(t,camera,reduced){windUniform.value=reduced?0:t;for(let f of fogPlanes){f.visible=f.position.distanceToSquared(camera.position)<8500;f.rotation.y=camera.rotation.y;if(!reduced)f.position.x=f.userData.baseX+Math.sin(t*.035+f.userData.phase)*7;}for(let i=0;i<beams.length;i++)beams[i].material.opacity=reduced?.023:.018+Math.max(0,Math.sin(t*.11+i*1.7))*.033;for(let l of lights)l.visible=l.position.distanceToSquared(camera.position)<2400;for(let a of animated){if(!reduced)a.object.rotation.x=t*.12;}camera.updateMatrixWorld();for(let g of ghosts){if(loadModels)requestSculptedModel(g,g.position.distanceTo(camera.position));const fade=apparitionVisibility(g,camera);g.userData.visibility=fade;g.visible=fade>.005;if(!g.visible)continue;animateApparition(g,t,camera,reduced,fade);}particles.rotation.y=reduced?0:Math.sin(t*.008)*.04;},setQuality(low){fogMat.opacity=low?.18:.25;}};
 }

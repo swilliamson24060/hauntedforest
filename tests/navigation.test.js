@@ -7,6 +7,6 @@ const wall=createNavigator([],Array.from({length:9},(_,i)=>({x:5,z:i-4,r:.8})),{
 const context=new Proxy({createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4)}),createLinearGradient:()=>({addColorStop(){}}),createRadialGradient:()=>({addColorStop(){}})},{get:(o,k)=>o[k]||(()=>{})});
 globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>context}),createElementNS:()=>({addEventListener(){},removeEventListener(){},set src(v){}})};
 const {makeWorld}=await import('../world.js');const {locations}=await import('../locations.js');
-const world=makeWorld(new T.Scene(),{mobile:true}),nav=createNavigator(world.roads,world.colliders),start={x:-125,z:97.5};
+const world=makeWorld(new T.Scene(),{mobile:true,loadModels:false}),nav=createNavigator(world.roads,world.colliders),start={x:-125,z:97.5};
 for(const l of locations){let target={x:l.x,z:l.z+([17,18].includes(l.id)?3:8)};const result=nav.route(start,target);assert.ok(result,`route to ${l.name}`);assert.ok(result.every(p=>nav.isWalkable(p)),`${l.name}: avoid all physical obstacles`);assert.ok(distance2D(result.at(-1),target)<2,`${l.name}: arrive at the approach`);}
 console.log('PASS: all 24 destinations reachable through actual world collision geometry; no teleportation, wall crossing or invalid endpoints');

@@ -1,0 +1,209 @@
+[
+  {
+    "id": 1,
+    "name": "Whispering Pines",
+    "file": "01-whispering-pines.glb",
+    "lookHeight": 2.5,
+    "triangles": 54979,
+    "bytes": 1342624,
+    "drawCalls": 4
+  },
+  {
+    "id": 2,
+    "name": "The Hollow Oak",
+    "file": "02-the-hollow-oak.glb",
+    "lookHeight": 3.5,
+    "triangles": 54994,
+    "bytes": 1421256,
+    "drawCalls": 5
+  },
+  {
+    "id": 3,
+    "name": "The Watcher’s Clearing",
+    "file": "03-the-watcher-s-clearing.glb",
+    "lookHeight": 4,
+    "triangles": 54884,
+    "bytes": 1330772,
+    "drawCalls": 5
+  },
+  {
+    "id": 4,
+    "name": "The Widow’s Shack",
+    "file": "04-the-widow-s-shack.glb",
+    "lookHeight": 2.5,
+    "triangles": 54842,
+    "bytes": 1330912,
+    "drawCalls": 5
+  },
+  {
+    "id": 5,
+    "name": "The Drowned Bog",
+    "file": "05-the-drowned-bog.glb",
+    "lookHeight": 2.5,
+    "triangles": 54965,
+    "bytes": 1333644,
+    "drawCalls": 5
+  },
+  {
+    "id": 6,
+    "name": "Will-o’-Wisp Fen",
+    "file": "06-will-o-wisp-fen.glb",
+    "lookHeight": 1.5,
+    "triangles": 54729,
+    "bytes": 1302248,
+    "drawCalls": 6
+  },
+  {
+    "id": 7,
+    "name": "The Sunken Chapel",
+    "file": "07-the-sunken-chapel.glb",
+    "lookHeight": 2.5,
+    "triangles": 55608,
+    "bytes": 1318772,
+    "drawCalls": 12
+  },
+  {
+    "id": 8,
+    "name": "The Briar Tunnel",
+    "file": "08-the-briar-tunnel.glb",
+    "lookHeight": 2.5,
+    "triangles": 54841,
+    "bytes": 1357304,
+    "drawCalls": 7
+  },
+  {
+    "id": 9,
+    "name": "The Stone Circle",
+    "file": "09-the-stone-circle.glb",
+    "lookHeight": 4.2,
+    "triangles": 54985,
+    "bytes": 1361956,
+    "drawCalls": 8
+  },
+  {
+    "id": 10,
+    "name": "The Forgotten Well",
+    "file": "10-the-forgotten-well.glb",
+    "lookHeight": 2.5,
+    "triangles": 54984,
+    "bytes": 1325936,
+    "drawCalls": 6
+  },
+  {
+    "id": 11,
+    "name": "The Hanging Orchard",
+    "file": "11-the-hanging-orchard.glb",
+    "lookHeight": 2.5,
+    "triangles": 54846,
+    "bytes": 1330148,
+    "drawCalls": 4
+  },
+  {
+    "id": 12,
+    "name": "The Corn Patch",
+    "file": "12-the-corn-patch.glb",
+    "lookHeight": 2.5,
+    "triangles": 54829,
+    "bytes": 1348064,
+    "drawCalls": 4
+  },
+  {
+    "id": 13,
+    "name": "The Abandoned Mill",
+    "file": "13-the-abandoned-mill.glb",
+    "lookHeight": 2.5,
+    "triangles": 54936,
+    "bytes": 1319824,
+    "drawCalls": 4
+  },
+  {
+    "id": 14,
+    "name": "The Bone-white Bridge",
+    "file": "14-the-bone-white-bridge.glb",
+    "lookHeight": 1.8,
+    "triangles": 47504,
+    "bytes": 1227320,
+    "drawCalls": 7
+  },
+  {
+    "id": 15,
+    "name": "The Mirror Pool",
+    "file": "15-the-mirror-pool.glb",
+    "lookHeight": 2.5,
+    "triangles": 54970,
+    "bytes": 1318596,
+    "drawCalls": 13
+  },
+  {
+    "id": 16,
+    "name": "The Cave Mouth",
+    "file": "16-the-cave-mouth.glb",
+    "lookHeight": 2.5,
+    "triangles": 54898,
+    "bytes": 1326920,
+    "drawCalls": 4
+  },
+  {
+    "id": 17,
+    "name": "The Echo Chamber",
+    "file": "17-the-echo-chamber.glb",
+    "lookHeight": 2.5,
+    "triangles": 54877,
+    "bytes": 1322296,
+    "drawCalls": 5
+  },
+  {
+    "id": 18,
+    "name": "The Blind Sanctuary",
+    "file": "18-the-blind-sanctuary.glb",
+    "lookHeight": 1.3,
+    "triangles": 56114,
+    "bytes": 1499228,
+    "drawCalls": 24
+  },
+  {
+    "id": 19,
+    "name": "The Moth Garden",
+    "file": "19-the-moth-garden.glb",
+    "lookHeight": 2.5,
+    "triangles": 54828,
+    "bytes": 1356504,
+    "drawCalls": 10
+  },
+  {
+    "id": 20,
+    "name": "The Wolves’ Hollow",
+    "file": "20-the-wolves-hollow.glb",
+    "lookHeight": 1.8,
+    "triangles": 54996,
+    "bytes": 1458944,
+    "drawCalls": 12
+  },
+  {
+    "id": 21,
+    "name": "The Ashen Campsite",
+    "file": "21-the-ashen-campsite.glb",
+    "lookHeight": 2.5,
+    "triangles": 55403,
+    "bytes": 1324016,
+    "drawCalls": 9
+  },
+  {
+    "id": 22,
+    "name": "The Nameless Graveyard",
+    "file": "22-the-nameless-graveyard.glb",
+    "lookHeight": 1.5,
+    "triangles": 54870,
+    "bytes": 1330476,
+    "drawCalls": 3
+  },
+  {
+    "id": 23,
+    "name": "The Last Lantern",
+    "file": "23-the-last-lantern.glb",
+    "lookHeight": 2.5,
+    "triangles": 54908,
+    "bytes": 1325272,
+    "drawCalls": 4
+  }
+]

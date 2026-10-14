@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {GLTFLoader} from '../vendor/GLTFLoader.js';
+import {animateWraith} from '../imported-wraith.js';
+import * as T from '../vendor/three.module.js';
+const bytes=await readFile(new URL('../assets/models/gatekeeper-wraith.glb',import.meta.url));
+const gltf=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+let triangles=0;gltf.scene.traverse(o=>{if(o.isMesh){triangles+=o.geometry.index.count/3;assert.ok(o.geometry.attributes.position.count>0);}});
+assert.ok(triangles>40000&&triangles<65000);assert.ok(bytes.length<1500000);
+const root=new T.Group(),material=new T.MeshStandardMaterial();root.userData={baseY:2,importedWraith:{model:gltf.scene,materials:[material]}};
+animateWraith(root,5,false,.5);assert.equal(material.opacity,.5);assert.ok(Number.isFinite(root.position.y));
+animateWraith(root,6,true,0);assert.equal(root.position.y,2);assert.equal(material.opacity,0);
+console.log(`PASS: uploaded wraith parses (${triangles} triangles), animates, fades, and respects reduced motion`);

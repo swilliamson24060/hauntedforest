@@ -61,3 +61,16 @@ Run `npm test` (or `node tests/hauntings.test.js`) to verify automatic sightings
 
 ## Trail guidance
 The map selects destinations without teleportation. A faint, soft-edged green glow highlights the next stretch of the route, following terrain and avoiding tree trunks, stonework, walls and shrub centres. Walking off-route triggers a new route from your current position. The light ends at the landmark approach; you can clear it at any time from the map. Dense shrubs, ferns and taller undergrowth define the trail edges, with open junctions and landmark entrances.
+
+Apparitions dissolve as you approach (fully gone within 4 m). Seven hauntings appear only at the edges of vision. Brief visible glimpses record automatically; the compact HUD shows apparitions seen and remaining.
+
+The Black Gate now uses the supplied Wraith of the Void sculpt, optimized to 59,852 triangles (about 1.1 MB), with spectral shading, hover, and proximity fading. It is an untextured, unrigged model; movement is applied to the whole figure. 
+
+## Sculpted apparition collection
+All 23 remaining locations now have separate GLB models. Human-like figures adapt the supplied Wraith of the Void mesh with different proportions, robes, crowns, and props; their original sculpted heads are preserved. The rooted oak god, river creature, sleeper, and spectral wolf have newly constructed bodies. The collection also includes moth wings, raven feathers, orbiting wisps, a chapel choir, and four lost travellers.
+
+Open `models.html` to browse, rotate, and download each model. These are geometric sculptures with procedural spectral materials, not photorealistic textured characters or skeletal motion-capture assets. Moving parts use articulated scene nodes; cloth has subtle shader movement. The supplied gatekeeper remains unchanged.
+
+The 23 new files total about 32 MB, with around 47–56 thousand triangles each. Nearby models load two at a time; failed loads retain the original procedural apparition. Existing proximity fading, peripheral-only hauntings, journal counts, and saved progress remain active. Actual phone performance still needs device testing.
+
+To rebuild the models, run `npm install` followed by `npm run models:build`. The generator uses the bundled gatekeeper mesh and the pinned meshoptimizer development dependency. Serving the game requires no installation or build step.

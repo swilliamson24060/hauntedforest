@@ -1,6 +1,23 @@
 import * as T from './vendor/three.module.js';
 
-// Observation records a haunting; it never controls whether that haunting exists.
+// These hauntings can only be caught near the left or right edge of vision.
+export const peripheralHauntings=new Set([1,3,8,12,15,20,22]);
+const sightTarget=new T.Vector3(),viewTarget=new T.Vector3();
+export function apparitionVisibility(g,camera){
+  const distance=Math.hypot(g.position.x-camera.position.x,g.position.z-camera.position.z);
+  let fade=T.MathUtils.smoothstep(distance,4,13)*(1-T.MathUtils.smoothstep(distance,28,42));
+  if(peripheralHauntings.has(g.userData.id)){
+    sightTarget.copy(g.position);sightTarget.y+=g.userData.lookHeight||1.5;
+    viewTarget.copy(sightTarget).applyMatrix4(camera.matrixWorldInverse);
+    if(viewTarget.z>=0)return 0;
+    sightTarget.project(camera);
+    if(Math.abs(sightTarget.y)>1||Math.abs(sightTarget.x)>1.15)return 0;
+    fade*=T.MathUtils.smoothstep(Math.abs(sightTarget.x),.42,.72);
+  }
+  return fade;
+}
+
+// Discovery uses the same visibility that renders the apparition.
 export function hasClearSight(from, to, colliders) {
   const dx=to.x-from.x, dz=to.z-from.z, lengthSquared=dx*dx+dz*dz;
   if(lengthSquared<.01)return true;
@@ -31,9 +48,9 @@ export function createObserver(onSeen) {
       target.copy(g.position);target.y+=g.userData.lookHeight||1.5;
       sphere.center.copy(target);sphere.radius=.5;
       const distance=target.distanceTo(camera.position);
-      const visible=g.visible&&distance<24&&frustum.intersectsSphere(sphere)&&hasClearSight(camera.position,target,colliders);
+      const visible=g.visible&&(g.userData.visibility??1)>.18&&distance<28&&frustum.intersectsSphere(sphere)&&hasClearSight(camera.position,target,colliders);
       const elapsed=visible?(dwell.get(id)||0)+delta:0;dwell.set(id,elapsed);
-      if(elapsed>=.55){notified.add(id);onSeen(id);}
+      if(elapsed>=(peripheralHauntings.has(id)?.18:.35)){notified.add(id);onSeen(id);}
     }
   };
 }

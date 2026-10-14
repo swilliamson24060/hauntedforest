@@ -17,3 +17,19 @@ Physical iOS/Android device performance and audio quality remain unverified. Des
 - Inspected the dense foliage and subtle guiding light at phone and desktop widths.
 - Walked from the Black Gate toward Will-o’-Wisp Fen; remaining distance updated and guidance cleared on arrival.
 - No captured browser errors or warnings during route selection and walking.
+
+## Sculpted collection verification
+- Parsed all 23 new GLBs with the bundled loader; checked finite positions, normals, bounds, and articulated transforms.
+- Verified each asset is under 1.7 MB and 65,000 triangles, and the manifest covers locations 1–23.
+- Tested opacity transitions, near-player disappearance, and reduced-motion transforms for every model.
+- Inspected the entire collection in the model gallery and revised faces, hands, and creature proportions.
+- Walked from the gate to the fen in the live forest; the new orbiting spirits loaded and rendered without captured errors or warnings.
+- Existing observation, route planning, and uploaded-gatekeeper tests pass.
+- Gallery and new-model forest rendering were checked in the desktop preview. Requested viewport overrides did not change the gallery size in this browser session, so a fresh narrow-screen gallery check and physical mobile hardware testing remain outstanding.
+
+## Head attachment correction
+- Removed added face/head geometry from every wraith-based figure, preserving the source mesh's existing head.
+- Removed the detached auxiliary bog faces and attached the oak/river heads with neck geometry.
+- Inspected all 23 revised thumbnails and rotated the moth queen to check front and side views.
+- Added regression assertions: wraith-based models contain no extra carved-head group; only the three purpose-built creatures have one.
+- The refreshed gallery rendered successfully in the narrow browser viewport.

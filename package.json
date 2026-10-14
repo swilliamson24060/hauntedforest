@@ -1,0 +1,1 @@
+{"name":"hauntedforest","version":"2.0.0","private":true,"type":"module","description":"Hollowmere: a first-person 3D haunted forest","scripts":{"start":"python3 -m http.server 8766","check":"node --check game.js && node --check world.js && node --check audio.js"}}
